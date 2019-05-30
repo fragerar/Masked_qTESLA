@@ -1,0 +1,424 @@
+Rand: 88613171
+Rand: 862406129
+Rand: 1990473879
+Rand: 1110502342
+Rand: 3199802690
+
+===========================================================================================
+Testing unmasked version of signature scheme qTESLA, system qTesla-I, tests for 10000 iterations
+===========================================================================================
+Signature tests PASSED... 
+
+qTESLA keygen: 
+median:  899606 cycles
+average: 1131281 cycles
+
+qTESLA sign: 
+median:  645269 cycles
+average: 941394 cycles
+
+qTESLA verify: 
+median:  107837 cycles
+average: 135613 cycles
+
+Total time taken by CPU: 3.718750
+Time for one signature (s): 0.000372
+Sig/sec: 2689.075630
+Avg cycles count: 964863
+
+
+Rand: 164384018
+Rand: 2817416038
+Rand: 3491685840
+Rand: 706917765
+Rand: 884618848
+
+====================================================================================================================
+Testing correctness masked order 1 version of signature scheme qTESLA 50 iterations 
+====================================================================================================================
+Signature tests PASSED... 
+
+
+====================================================================================================================
+Testing masked order 1 version of signature scheme qTESLA, system qTesla-I, tests for 10000 iterations
+====================================================================================================================
+qTESLA masked sign: 
+median:  2504204 cycles
+average: 3459521 cycles
+
+Total time taken by CPU: 13.343750
+Time for one signature (s): 0.001334
+Sig/sec: 749.414520
+
+
+=========================================================
+                    TEST GADGETS order 1 (1000000 tests)
+=========================================================
+RG: 
+median:  98 cycles
+average: 140 cycles
+
+Masked round: 
+median:  164 cycles
+average: 174 cycles
+
+Masked_WR: 
+median:  280 cycles
+average: 379 cycles
+
+Masked_RS: 
+median:  174 cycles
+average: 223 cycles
+
+sec_add: 
+median:  44 cycles
+average: 54 cycles
+
+sec_and: 
+median:  20 cycles
+average: 26 cycles
+
+full_xor: 
+median:  20 cycles
+average: 27 cycles
+
+refresh: 
+median:  20 cycles
+average: 28 cycles
+
+full_refresh: 
+median:  20 cycles
+average: 30 cycles
+
+full_refresh_arith: 
+median:  48 cycles
+average: 68 cycles
+
+sec_arith_bool_mod_q: 
+median:  96 cycles
+average: 109 cycles
+
+sec_bool_arith: 
+median:  20 cycles
+average: 24 cycles
+
+full_add_coef: 
+median:  54 cycles
+average: 69 cycles
+
+Rand: 2305899943
+Rand: 731852339
+Rand: 4063167963
+Rand: 3361157591
+Rand: 3629700345
+
+====================================================================================================================
+Testing correctness masked order 2 version of signature scheme qTESLA 50 iterations 
+====================================================================================================================
+Signature tests PASSED... 
+
+
+====================================================================================================================
+Testing masked order 2 version of signature scheme qTESLA, system qTesla-I, tests for 10000 iterations
+====================================================================================================================
+qTESLA masked sign: 
+median:  13878830 cycles
+average: 19311541 cycles
+
+Total time taken by CPU: 71.500000
+Time for one signature (s): 0.007150
+Sig/sec: 139.860140
+
+
+=========================================================
+                    TEST GADGETS order 2 (1000000 tests)
+=========================================================
+RG: 
+median:  410 cycles
+average: 619 cycles
+
+Masked round: 
+median:  1400 cycles
+average: 2008 cycles
+
+Masked_WR: 
+median:  2080 cycles
+average: 2884 cycles
+
+Masked_RS: 
+median:  1440 cycles
+average: 2064 cycles
+
+sec_add: 
+median:  294 cycles
+average: 416 cycles
+
+sec_and: 
+median:  28 cycles
+average: 40 cycles
+
+full_xor: 
+median:  24 cycles
+average: 70 cycles
+
+refresh: 
+median:  24 cycles
+average: 39 cycles
+
+full_refresh: 
+median:  32 cycles
+average: 52 cycles
+
+full_refresh_arith: 
+median:  142 cycles
+average: 184 cycles
+
+sec_arith_bool_mod_q: 
+median:  786 cycles
+average: 1129 cycles
+
+sec_bool_arith: 
+median:  42 cycles
+average: 51 cycles
+
+full_add_coef: 
+median:  152 cycles
+average: 217 cycles
+
+Rand: 3039272648
+Rand: 1169635812
+Rand: 3828321575
+Rand: 2129811588
+Rand: 4234700445
+
+====================================================================================================================
+Testing correctness masked order 3 version of signature scheme qTESLA 50 iterations 
+====================================================================================================================
+Signature tests PASSED... 
+
+
+====================================================================================================================
+Testing masked order 3 version of signature scheme qTESLA, system qTesla-I, tests for 10000 iterations
+====================================================================================================================
+qTESLA masked sign: 
+median:  24582943 cycles
+average: 33698208 cycles
+
+Total time taken by CPU: 125.906250
+Time for one signature (s): 0.012591
+Sig/sec: 79.424175
+
+
+=========================================================
+                    TEST GADGETS order 3 (1000000 tests)
+=========================================================
+RG: 
+median:  840 cycles
+average: 1236 cycles
+
+Masked round: 
+median:  2454 cycles
+average: 3413 cycles
+
+Masked_WR: 
+median:  3914 cycles
+average: 5445 cycles
+
+Masked_RS: 
+median:  2496 cycles
+average: 3509 cycles
+
+sec_add: 
+median:  592 cycles
+average: 810 cycles
+
+sec_and: 
+median:  44 cycles
+average: 64 cycles
+
+full_xor: 
+median:  34 cycles
+average: 63 cycles
+
+refresh: 
+median:  40 cycles
+average: 46 cycles
+
+full_refresh: 
+median:  52 cycles
+average: 82 cycles
+
+full_refresh_arith: 
+median:  282 cycles
+average: 390 cycles
+
+sec_arith_bool_mod_q: 
+median:  1152 cycles
+average: 1632 cycles
+
+sec_bool_arith: 
+median:  108 cycles
+average: 167 cycles
+
+full_add_coef: 
+median:  348 cycles
+average: 454 cycles
+
+Rand: 3353196985
+Rand: 745431197
+Rand: 334660838
+Rand: 482522832
+Rand: 2723343451
+
+====================================================================================================================
+Testing correctness masked order 4 version of signature scheme qTESLA 50 iterations 
+====================================================================================================================
+Signature tests PASSED... 
+
+
+====================================================================================================================
+Testing masked order 4 version of signature scheme qTESLA, system qTesla-I, tests for 10000 iterations
+====================================================================================================================
+qTESLA masked sign: 
+median:  39967191 cycles
+average: 54282727 cycles
+
+Total time taken by CPU: 206.203125
+Time for one signature (s): 0.020620
+Sig/sec: 48.495870
+
+
+=========================================================
+                    TEST GADGETS order 4 (1000000 tests)
+=========================================================
+RG: 
+median:  1328 cycles
+average: 1875 cycles
+
+Masked round: 
+median:  4314 cycles
+average: 6052 cycles
+
+Masked_WR: 
+median:  6432 cycles
+average: 9071 cycles
+
+Masked_RS: 
+median:  4432 cycles
+average: 6180 cycles
+
+sec_add: 
+median:  870 cycles
+average: 1099 cycles
+
+sec_and: 
+median:  70 cycles
+average: 84 cycles
+
+full_xor: 
+median:  56 cycles
+average: 60 cycles
+
+refresh: 
+median:  56 cycles
+average: 62 cycles
+
+full_refresh: 
+median:  82 cycles
+average: 97 cycles
+
+full_refresh_arith: 
+median:  838 cycles
+average: 830 cycles
+
+sec_arith_bool_mod_q: 
+median:  3148 cycles
+average: 3442 cycles
+
+sec_bool_arith: 
+median:  288 cycles
+average: 338 cycles
+
+full_add_coef: 
+median:  868 cycles
+average: 870 cycles
+
+Rand: 2664504312
+Rand: 3200765800
+Rand: 1352794783
+Rand: 3122168529
+Rand: 430702227
+
+====================================================================================================================
+Testing correctness masked order 5 version of signature scheme qTESLA 50 iterations 
+====================================================================================================================
+Signature tests PASSED... 
+
+
+====================================================================================================================
+Testing masked order 5 version of signature scheme qTESLA, system qTesla-I, tests for 10000 iterations
+====================================================================================================================
+qTESLA masked sign: 
+median:  59551027 cycles
+average: 80529228 cycles
+
+Total time taken by CPU: 308.843750
+Time for one signature (s): 0.030884
+Sig/sec: 32.378832
+
+
+=========================================================
+                    TEST GADGETS order 5 (1000000 tests)
+=========================================================
+RG: 
+median:  2416 cycles
+average: 3403 cycles
+
+Masked round: 
+median:  6142 cycles
+average: 8457 cycles
+
+Masked_WR: 
+median:  9034 cycles
+average: 12716 cycles
+
+Masked_RS: 
+median:  6254 cycles
+average: 8730 cycles
+
+sec_add: 
+median:  1192 cycles
+average: 1752 cycles
+
+sec_and: 
+median:  96 cycles
+average: 143 cycles
+
+full_xor: 
+median:  118 cycles
+average: 185 cycles
+
+refresh: 
+median:  70 cycles
+average: 109 cycles
+
+full_refresh: 
+median:  104 cycles
+average: 161 cycles
+
+full_refresh_arith: 
+median:  726 cycles
+average: 1038 cycles
+
+sec_arith_bool_mod_q: 
+median:  3500 cycles
+average: 4894 cycles
+
+sec_bool_arith: 
+median:  884 cycles
+average: 1236 cycles
+
+full_add_coef: 
+median:  740 cycles
+average: 1065 cycles
+
