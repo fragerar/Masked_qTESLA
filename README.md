@@ -1,4 +1,4 @@
-# Masked_qTESLA
+# Masked qTESLA
 
 Masked implementation of the [qTESLA post-quantum signature scheme](https://qtesla.org/).
 
