@@ -18,4 +18,9 @@ int full_RS(masked_poly p);
 int masked_well_rounded(int* a);
 int full_WR(masked_poly p);
 
+void gaussian(int* a);
+void masked_gaussian_poly(masked_poly s);
+void masked_sign_choice(masked_poly p);
+int masked_checkES(masked_poly p, unsigned bound);
+
 #endif

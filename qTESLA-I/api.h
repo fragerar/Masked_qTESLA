@@ -42,8 +42,8 @@ int crypto_sign_open(
 
 
 void crypto_masked_keypair(masked_poly sk, masked_poly e, unsigned char* t, unsigned char* seed);
-int crypto_masked_sign(unsigned char *sm, unsigned long long *smlen,const unsigned char *m, unsigned long long mlen, masked_poly sk, masked_poly e, unsigned char* seed);
-
+int  crypto_masked_sign(unsigned char *sm, unsigned long long *smlen,const unsigned char *m, unsigned long long mlen, masked_poly sk, masked_poly e, unsigned char* seed);
+void masked_keypair(masked_poly sk, masked_poly me, unsigned char* pk, unsigned char* seed);
 
 
 

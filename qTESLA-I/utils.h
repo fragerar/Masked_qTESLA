@@ -6,11 +6,16 @@
 #include <stdio.h>
 
 int mod_q(int a);
+int mod_q128(__int128_t a);
 void print_bytes(unsigned char* b, int len);
 void print_bits(int x);
+void print_bits128(__int128_t x);
 void print_shares(int* x);
+void print_shares128(__int128_t* x);
 void print_shares_vs(int* x, const int N);
 void print_shares_bits(int* x);
+void print_shares_bits128(__int128_t* x);
+
 void print_shares_bits_vs(int* x, const int N);
 void print_full_bits(int x);
 void print_full_shares_bits(int* x);

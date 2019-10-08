@@ -5,8 +5,12 @@
 #include <stdlib.h>
 #include <time.h>
 #include <stdio.h>
+#include <stdint.h>
 
+
+typedef __int128_t int128_t;
 typedef int masked[MASKING_ORDER+1];
+typedef __int128_t masked128[MASKING_ORDER+1];
 
 void full_add(masked_poly, poly res);
 void full_add_small(masked_poly, uint16_t* res);
@@ -24,6 +28,10 @@ void sec_add(int* x, int* y, int* z);
 void sec_add_vs(int* x, int* y, int* z, const int N);
 void sec_and_const(int* x, int* y, int* res);
 void sec_add_const(int* x, int* y, int* z);
+
+void sec_add128(__int128_t* x, __int128_t* y, __int128_t* z);
+void sec_and128(__int128_t* x, __int128_t* y, __int128_t* res);
+void refresh128(__int128_t* x, __int128_t* res);
 
 void sec_arith_bool_mod_p(int* a, int* a_prime);
 void sec_bool_arith(int* x_bool, int* x_arith);

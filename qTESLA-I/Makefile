@@ -20,7 +20,7 @@ else ifeq "$(ARCH)" "ARM64"
 endif
 
 
-ORDER=1
+ORDER=2
 TESTS=1000
 RUNS=100
 

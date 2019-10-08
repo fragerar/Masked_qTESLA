@@ -221,16 +221,6 @@ void sec_and_vs(int* x, int* y, int* res, const int N)
 	
 
 
-	/*if (N == 1){
-    int u = rand_uint32();
-    int z;
-    z = u ^ (x[0] & y[0]);
-    z = z ^ (x[0] & y[1]);
-    z = z ^ (x[1] & y[0]);
-    z = z ^ (x[1] & y[1]);
-    res[0] = z;
-    res[1] = u;
-	} else {*/
     int r[N];
     int i, j, z_ij, z_ji;
     for(i=0; i < N; ++i) r[i] = x[i] & y[i];
@@ -246,7 +236,7 @@ void sec_and_vs(int* x, int* y, int* res, const int N)
             r[j] ^= z_ji;            
         }
     for(i=0; i < N; ++i) res[i] = r[i];
-	//}
+
 }
 
 void refresh_vs(int* x, int* res, const int N)
@@ -270,9 +260,6 @@ void refresh_vs(int* x, int* res, const int N)
 void sec_add_vs(int* x, int* y, int* z, const int N)
 {
 
-	//if(N == 1) 
-  //  order_1_add(x, y, z);
-	//else{
 
     int p[N], g[N], a[N], a_prime[N];
     int i, j, pow;
@@ -292,7 +279,7 @@ void sec_add_vs(int* x, int* y, int* z, const int N)
     sec_and_vs(a, p, a, N);
     for(i=0; i < N; ++i) g[i] ^= a[i];
     for(i=0; i < N; ++i) z[i] = x[i]^y[i]^(g[i]<<1);
-	//}
+	
 }
 
 
@@ -306,10 +293,6 @@ void convert_A_B(int* arith_x, int* bool_x, const int N){
 		bool_x[0] = arith_x[0];
 		return;
 	}
-	/*else if (N == 2) {
-		goubin_arith_bool(arith_x, bool_x);
-		return;
-	}*/
 
 	int HALF = (N+1)/2;
 	int x[HALF], x_p[2*HALF], y[HALF], y_p[2*HALF]; 
@@ -352,6 +335,31 @@ void refresh(int* x, int* res)
 #ifdef COUNT
             count_rand++;
 #endif
+            res[i] ^= r;
+            res[j] ^= r;
+        }
+    
+}
+
+
+void refresh128(__int128_t* x, __int128_t* res)
+/// VERIFIED : does the following : 
+/*  Input : 
+*          x : 128-bit boolean masking of an integer X
+*   Output :
+*          res : 128-bit boolean masking of an integer RES such that
+*                             X = RES            
+*/
+{
+
+
+
+    int i,j;
+    __int128_t r;
+    for(i=0; i < N_SHARES; ++i) res[i] = x[i];
+    for(i=0; i < N_SHARES; ++i)
+        for(j=i+1; j < N_SHARES; ++j){
+            r = ((__int128_t)rand_uint32()<<96) ||((__int128_t)rand_uint32()<<64) || ((__int128_t)rand_uint32()<<32) || rand_uint32();
             res[i] ^= r;
             res[j] ^= r;
         }
@@ -419,8 +427,6 @@ void sec_and(int* x, int* y, int* res)
 {
 
 
-
-
 #if OPTI == 1 && MASKING_ORDER == 1
     int u = rand_uint32();
 #ifdef COUNT
@@ -452,6 +458,35 @@ void sec_and(int* x, int* y, int* res)
     for(i=0; i < N_SHARES; ++i) res[i] = r[i];
 #endif
 }
+
+
+void sec_and128(__int128_t* x, __int128_t* y, __int128_t* res)
+/// VERIFIED : does the following : 
+/*  Input : 
+*          x : 128-bit boolean masking of an integer X
+*          y : 128-bit boolean masking of an integer Y
+*   Output :
+*          res : 128-bit boolean masking of an integer Z such that
+*                             X&Y = res            
+*/
+{
+
+    masked128 r;
+    int i, j;
+    __int128_t z_ij, z_ji;
+    for(i=0; i < N_SHARES; ++i) r[i] = x[i] & y[i];
+    for(i=0; i < N_SHARES; ++i)
+        for(j=i+1; j < N_SHARES; ++j){
+            z_ij  = ((__int128_t)rand_uint32()<<96) ||((__int128_t)rand_uint32()<<64) || ((__int128_t)rand_uint32()<<32) || rand_uint32();
+            z_ji  = (x[i] & y[j]) ^ z_ij;
+            z_ji ^= (x[j] & y[i]);
+            r[i] ^= z_ij;
+            r[j] ^= z_ji;            
+        }
+    for(i=0; i < N_SHARES; ++i) res[i] = r[i];
+
+}
+
 
 
 
@@ -489,6 +524,40 @@ void sec_add(int* x, int* y, int* z)
     for(i=0; i < N_SHARES; ++i) g[i] ^= a[i];
     for(i=0; i < N_SHARES; ++i) z[i] = x[i]^y[i]^(g[i]<<1);
 #endif
+}
+
+
+void sec_add128(__int128_t* x, __int128_t* y, __int128_t* z)
+/// VERIFIED : does the following : 
+/*  Input : 
+*          x : arithmetical masking of an integer X
+*          y : arithmetical masking of an integer Y
+*   Output :
+*          z : arithmetical masking of an integer Z such that
+*                             X+Y=Z              
+*/{
+
+
+
+  masked128 p, g, a, a_prime;
+  int i, j, pow;
+
+  for(i=0; i < N_SHARES; ++i) p[i] = x[i] ^ y[i];
+  sec_and128(x, y, g);
+  for(j=1; j <= W_ZERO_LOG_128-1; ++j){
+      pow = 1<<(j-1);
+      for(i=0; i < N_SHARES; ++i) a[i] = (g[i] << pow); //!!!
+      sec_and128(a, p, a);
+      for(i=0; i < N_SHARES; ++i) g[i] ^= a[i];
+      for(i=0; i < N_SHARES; ++i) a_prime[i] = (p[i] << pow);
+      refresh128(a_prime, a_prime);
+      sec_and128(p, a_prime, p);
+  }
+  for(i=0; i < N_SHARES; ++i) a[i] = (g[i] << (1<<(W_ZERO_LOG_128-1))); //!!!
+  sec_and128(a, p, a);
+  for(i=0; i < N_SHARES; ++i) g[i] ^= a[i];
+  for(i=0; i < N_SHARES; ++i) z[i] = x[i]^y[i]^(g[i]<<1);
+
 }
 
 

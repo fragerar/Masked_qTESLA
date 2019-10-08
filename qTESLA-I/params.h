@@ -38,6 +38,7 @@
 //#define rand_uint32() 0
 
 
+#define MASKED_KEYGEN
 
 
 #ifndef NRUNS
@@ -50,17 +51,18 @@
 
 #define OPTI 1
 #ifndef MASKING_ORDER
-	#define MASKING_ORDER 2
+	#define MASKING_ORDER 4
 #endif
 #define N_SHARES MASKING_ORDER+1
 #define EXACT_Q_LOG 22
 #define W_ZERO 21
-#define W_ZERO_LOG 5
+#define W_ZERO_LOG 5   //ceil(log_2(bitsize-1))
+#define W_ZERO_LOG_128 7
 #define SECRET_SIZE 4
 #define BS_W 32
 #define KARATSUBOUND 32
 
-#define COUNT
+//#define COUNT
 
 
 #endif

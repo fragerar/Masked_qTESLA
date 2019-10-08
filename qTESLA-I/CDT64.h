@@ -15,6 +15,7 @@
 
 #define CDT_ROWS 209
 #define CDT_COLS 1
+#define CDT_SIZE CDT_ROWS 
 
 static const int64_t cdt_v[CDT_ROWS*CDT_COLS] = {
     0x0000000000000000LL, // 0

@@ -109,9 +109,6 @@ void test_hash(){
     full_refresh_arith(r_m, r_m);
     t2 = masked_rounding(r_m);
 
-    //printf("Rounding of %u : %u =?= %u => Well yes but actually...", i, t, t2);
-    //if (t == t2) printf("Yes ! \n");
-    //else         printf("No  ! \n");
     if (t != t2){ 
       printf("Rounding of");
       print_bits(j);
@@ -134,28 +131,22 @@ int main(void)
     //masked_poly y;
     
     srand(time(NULL));
+    seed_xoshiro();
     printf("Hello there\n");
 
-    //test_hash();
-   
-
-
     
-    print_accrates();
-
     
+    masked_keypair(msk, me, pk, seed);
 
-    randombytes(mi, MLEN);
-
-    crypto_masked_keypair(msk, me, pk, seed);
-
-    
 
     crypto_masked_sign(sm, &smlen, mi, MLEN, msk, me, seed);
   
     printf("\n \n \n");
 
     valid = crypto_sign_open(mo, &mlen, sm, smlen, pk);
+    
+    
+    
 
     if (valid != 0) {
       printf("Signature verification FAILED. \n");

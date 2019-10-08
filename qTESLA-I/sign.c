@@ -347,8 +347,13 @@ int crypto_sign_open(unsigned char *m, unsigned long long *mlen, const unsigned 
 
 
 
+
 void crypto_masked_keypair(masked_poly sk, masked_poly me, unsigned char* pk, unsigned char* seed)
 {
+
+  /*
+    Unsafe version of the keygen, output secret key in masked form
+  */
   unsigned char randomness[CRYPTO_RANDOMBYTES], randomness_extended[4*CRYPTO_SEEDBYTES];
   poly s, e, a, t;
   int nonce = 0;  // Initialize domain separator for error and secret polynomials
@@ -410,6 +415,54 @@ void crypto_masked_keypair(masked_poly sk, masked_poly me, unsigned char* pk, un
 
 
 
+void masked_keypair(masked_poly sk, masked_poly me, unsigned char* pk, unsigned char* seed){
+  /*
+  
+    Safely masked keygen
+
+  */
+
+  masked_poly t;
+  poly a,t_unmasked;
+  unsigned char randomness[CRYPTO_RANDOMBYTES], randomness_extended[4*CRYPTO_SEEDBYTES];
+
+  randombytes(randomness, CRYPTO_RANDOMBYTES);
+  SHAKE(randomness_extended, 4*CRYPTO_SEEDBYTES, randomness, CRYPTO_RANDOMBYTES);
+#ifdef DEBUG
+  ctr_keygen=0;
+#endif
+
+
+  do{
+#ifdef DEBUG
+  ctr_keygen++;
+#endif
+
+    masked_gaussian_poly(sk);
+  }while (masked_checkES(sk,PARAM_KEYGEN_BOUND_S) == 0);
+
+  do{
+#ifdef DEBUG
+  ctr_keygen++;
+#endif
+    masked_gaussian_poly(me);
+  }while (masked_checkES(me,PARAM_KEYGEN_BOUND_E) == 0);
+
+  masked_sign_choice(sk);
+  masked_sign_choice(me);
+
+  poly_uniform(a, &randomness_extended[2*CRYPTO_SEEDBYTES]);
+
+  for(int i=0; i < N_SHARES; ++i) poly_mul_pot(t[i], a, sk[i]);
+  for(int i=0; i < N_SHARES; ++i) poly_add(t[i], me[i], t[i]);
+  full_add(t, t_unmasked);
+
+  for(int i=0; i < CRYPTO_RANDOMBYTES; ++i)
+    seed[i] = randomness_extended[2*CRYPTO_SEEDBYTES+i];
+
+  encode_pk(pk, t_unmasked, &randomness_extended[2*CRYPTO_SEEDBYTES]);
+
+}
 
 
 

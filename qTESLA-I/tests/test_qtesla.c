@@ -383,7 +383,8 @@ int test_masked(){
   printf("Testing masked order %i version of signature scheme qTESLA, system %s, tests for %d iterations\n", MASKING_ORDER, CRYPTO_ALGNAME, NRUNS);
   printf("====================================================================================================================\n");
   randombytes(mi, MLEN);
-  
+  crypto_masked_keypair(msk, me, pk, seed);
+
   start_t = clock();
 
   for (i = 0; i < NRUNS; i++) {
@@ -523,6 +524,41 @@ int test_count(){
 #endif
 
 
+void test_keygen(){
+
+  unsigned int i, j;
+  unsigned char r;
+  unsigned long long cycles1[NRUNS];
+    
+    
+  clock_t start_t, end_t;
+  double total_t;
+  unsigned long long start_cycles, stop_cycles; 
+
+  printf("\n");
+  printf("====================================================================================================================\n");
+  printf("Testing masked order %i version of keygen, system %s, tests for %d iterations\n", MASKING_ORDER, CRYPTO_ALGNAME, NRUNS);
+  printf("====================================================================================================================\n");
+  randombytes(mi, MLEN);
+  
+  start_t = clock();
+
+  for (i = 0; i < NRUNS; i++) {
+
+    cycles1[i] = cpucycles();
+    masked_keypair(msk, me, pk, seed);
+    cycles1[i] = cpucycles() - cycles1[i];
+  }
+  end_t = clock();
+  total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+
+  print_results("qTESLA masked keygen: ", cycles1, NRUNS);  
+  printf("Total time taken by CPU: %f\n", total_t );
+  printf("Time for one keygen (s): %f\n",total_t/NRUNS);
+  printf("keygen/sec: %f\n", NRUNS/total_t);
+  printf("\n\n");
+}
+
 int main(void)
 {
 
@@ -538,10 +574,11 @@ int main(void)
     test_unmasked();
     timing_unmasked_sign();
   #else
-		//test_correctness();
-    //test_masked();
+		test_correctness();
+    test_masked();
+    //test_keygen();
     //test_gadgets();    
-    test_count();
+    //test_count();
   #endif  
 
   return 0;
